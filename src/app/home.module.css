@@ -38,9 +38,13 @@
 
 .brands {
   width: 450px;
-  height: 35px;
   position: relative;
   filter: grayscale(1);
+}
+
+.brandImg{
+  width: 100%;
+  height: auto;
 }
 
 .imgContainer {
@@ -71,9 +75,5 @@
 @media (max-width: 768px) {
   .title {
     font-size: 64px;
-  }
-
-  .brands {
-    height: 25px;
   }
 }
