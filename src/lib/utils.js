@@ -1,4 +1,4 @@
-import { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
 const connection = {};
 
@@ -8,10 +8,10 @@ export const connectToDb = async () => {
       console.log("Using existing connection");
       return;
     }
-    const db = await Mongoose.connect(process.env.MONGO);
+    const db = await mongoose.connect(process.env.MONGO);
     connection.isConnected = db.connections[0].readyState;
   } catch (error) {
     console.log(error);
-    throw new Error("Error connecting to database");
+    throw new Error(error);
   }
 };
