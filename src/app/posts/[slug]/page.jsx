@@ -15,6 +15,15 @@ import { getPost } from "@/lib/data";
 //   return res.json();
 // };
 
+export const generateMetadata = async ({ params }) => {
+  const post = await getPost(params.slug);
+
+  return {
+    title: post.title,
+    description: post.desc,
+  };
+};
+
 const SinglePostPage = async ({ params }) => {
   // const post = await getData(params.slug);
   const post = await getPost(params.slug);
