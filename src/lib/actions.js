@@ -12,7 +12,7 @@ export const addPost = async (formData) => {
   // const slug = formData.get("slug");
   // const userId = formData.get("userId");
 
-  const { title, desc, slug, userId } = Object.fromEntries(formData);
+  const { title, desc, slug, userId, imgLink } = Object.fromEntries(formData);
 
   try {
     connectToDb();
@@ -21,12 +21,13 @@ export const addPost = async (formData) => {
       desc,
       slug,
       userId,
+      img,
     });
 
     await newPost.save();
     console.log("post saved to db");
     //revalidatePath("/posts");
-    res.revalidate("/posts");
+    await res.revalidate("/posts");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
@@ -42,7 +43,7 @@ export const deletePost = async (formData) => {
 
     console.log(`post with id "${id}" deleted from db`);
     //revalidatePath("/posts");
-    res.revalidate("/posts");
+    await res.revalidate("/posts");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
@@ -90,7 +91,7 @@ export const register = async (formData) => {
 
     await newUser.save();
     console.log("user saved to db");
-    revalidatePath("/");
+    await res.revalidate("/");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };

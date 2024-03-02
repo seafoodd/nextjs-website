@@ -1,7 +1,7 @@
 import PostCard from "@/components/postCard/postCard";
 import styles from "./posts.module.css";
 import { getPosts } from "@/lib/data";
-import { revalidatePath } from "next/cache";
+//import { revalidatePath } from "next/cache";
 
 // FETCH DATA WITH AN API
 const getData = async () => {
