@@ -7,14 +7,14 @@ import { getPost } from "@/lib/data";
 
 // FETCH DATA WITH AN API
 const getData = async (slug) => {
-  console.log('slug', slug, `http://localhost:3000/api/posts/${slug}`)
-  const res = await fetch(`http://localhost:3000/api/posts/${slug}`);
-  
+  //console.log("slug", slug, `http://localhost:3000/api/posts/${slug}`);
+  const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {method: 'GET'});
+
   if (!res.ok) {
     throw new Error("Something went wrong");
   }
-  
-  //console.log('slug', res.json());
+
+  //console.log('res', res.json());
   return res.json();
 };
 
@@ -30,18 +30,17 @@ export const generateMetadata = async ({ params }) => {
 };
 
 const SinglePostPage = async ({ params }) => {
-
   const { slug } = params;
 
   // FETCH DATA WITH AN API
-  console.log(slug)
-  const post = await getData('test-test');
-  console.log('post', post)
+  //console.log(slug);
+  const post = await getData(slug);
+  console.log("post", post);
 
   // FETCH DATA WITHOUT AN API
   // const post = await getPost(params.slug);
 
-  console.log("post", post, params.slug);
+  //console.log("post", post, params.slug);
 
   return (
     <div className={styles.container}>
