@@ -1,6 +1,6 @@
 "use server";
 
-//import { revalidatePath } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { Post, User } from "./models";
 import { connectToDb } from "./utils";
 import { signIn, signOut } from "./auth";
@@ -12,7 +12,7 @@ export const addPost = async (formData) => {
   // const slug = formData.get("slug");
   // const userId = formData.get("userId");
 
-  const { title, desc, slug, userId, imgLink } = Object.fromEntries(formData);
+  const { title, desc, slug, userId, img } = Object.fromEntries(formData);
 
   try {
     connectToDb();
@@ -21,13 +21,13 @@ export const addPost = async (formData) => {
       desc,
       slug,
       userId,
-      imgLink,
+      img,
     });
 
     await newPost.save();
     console.log("post saved to db");
     //revalidatePath("/posts");
-    await res.revalidate("/posts");
+    await revalidatePath("/posts");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
@@ -43,7 +43,7 @@ export const deletePost = async (formData) => {
 
     console.log(`post with id "${id}" deleted from db`);
     //revalidatePath("/posts");
-    await res.revalidate("/posts");
+    await revalidatePath("/posts");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
@@ -91,7 +91,7 @@ export const register = async (formData) => {
 
     await newUser.save();
     console.log("user saved to db");
-    await res.revalidate("/");
+    await revalidatePath("/");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
