@@ -5,8 +5,9 @@ import { getPosts } from "@/lib/data";
 
 // FETCH DATA WITH AN API
 const getData = async () => {
-  "use client";
-  const res = await fetch(`${process.env.URL}/api/posts`, {cache: "no-store"});
+  const res = await fetch(`${process.env.URL}/api/posts`, {
+    next: { revalidate: 10 },
+  });
 
   if (!res.ok) {
     throw new Error("Something went wrong");
@@ -16,7 +17,6 @@ const getData = async () => {
 };
 
 const BlogPage = async () => {
-
   // FETCH DATA WITH AN API
   const posts = await getData();
 
