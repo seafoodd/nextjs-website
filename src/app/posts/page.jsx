@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 
 // FETCH DATA WITH AN API
 const getData = async () => {
-  const res = await fetch(`${process.env.URL}/api/posts`, {next: {revalidate:3600}});
+  const res = await fetch(`${process.env.URL}/api/posts`, {next: {revalidate:60}});
 
   if (!res.ok) {
     throw new Error("Something went wrong");

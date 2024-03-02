@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+//import { revalidatePath } from "next/cache";
 import { Post, User } from "./models";
 import { connectToDb } from "./utils";
 import { signIn, signOut } from "./auth";
@@ -25,7 +25,8 @@ export const addPost = async (formData) => {
 
     await newPost.save();
     console.log("post saved to db");
-    revalidatePath("/posts");
+    //revalidatePath("/posts");
+    res.revalidate("/posts");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
@@ -40,7 +41,8 @@ export const deletePost = async (formData) => {
     await Post.findByIdAndDelete(id);
 
     console.log(`post with id "${id}" deleted from db`);
-    revalidatePath("/posts");
+    //revalidatePath("/posts");
+    res.revalidate("/posts");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
