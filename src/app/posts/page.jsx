@@ -5,6 +5,7 @@ import { getPosts } from "@/lib/data";
 
 // FETCH DATA WITH AN API
 const getData = async () => {
+  "use client";
   const res = await fetch(`${process.env.URL}/api/posts`, {cache: "no-store"});
 
   if (!res.ok) {
