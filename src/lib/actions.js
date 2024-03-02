@@ -21,7 +21,7 @@ export const addPost = async (formData) => {
       desc,
       slug,
       userId,
-      img,
+      imgLink,
     });
 
     await newPost.save();
