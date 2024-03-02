@@ -1,15 +1,16 @@
 import PostCard from "@/components/postCard/postCard";
 import styles from "./posts.module.css";
 import { getPosts } from "@/lib/data";
+import { revalidatePath } from "next/cache";
 
 // FETCH DATA WITH AN API
 const getData = async () => {
-  const res = await fetch("http://localhost:3000/api/posts", {next: {revalidate:3600}});
+  const res = await fetch(`${process.env.URL}/api/posts`, {next: {revalidate:3600}});
 
   if (!res.ok) {
     throw new Error("Something went wrong");
   }
-
+  //revalidatePath("/posts");
   return res.json();
 };
 

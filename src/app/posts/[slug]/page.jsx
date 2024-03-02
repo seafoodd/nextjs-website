@@ -8,7 +8,7 @@ import { getPost } from "@/lib/data";
 // FETCH DATA WITH AN API
 const getData = async (slug) => {
   //console.log("slug", slug, `http://localhost:3000/api/posts/${slug}`);
-  const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {method: 'GET'});
+  const res = await fetch(`${process.env.URL}/api/posts/${slug}`, {method: 'GET'});
 
   if (!res.ok) {
     throw new Error("Something went wrong");
