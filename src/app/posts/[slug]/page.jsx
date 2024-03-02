@@ -5,18 +5,23 @@ import { Suspense } from "react";
 import Skeleton from "@/components/skeleton/skeleton";
 import { getPost } from "@/lib/data";
 
-// const getData = async (slug) => {
-//   const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${slug}`);
-
-//   if (!res.ok) {
-//     throw new Error("Something went wrong");
-//   }
-
-//   return res.json();
-// };
+// FETCH DATA WITH AN API
+const getData = async (slug) => {
+  console.log('slug', slug, `http://localhost:3000/api/posts/${slug}`)
+  const res = await fetch(`http://localhost:3000/api/posts/${slug}`);
+  
+  if (!res.ok) {
+    throw new Error("Something went wrong");
+  }
+  
+  //console.log('slug', res.json());
+  return res.json();
+};
 
 export const generateMetadata = async ({ params }) => {
-  const post = await getPost(params.slug);
+  const { slug } = params;
+
+  const post = await getPost(slug);
 
   return {
     title: post.title,
@@ -25,8 +30,17 @@ export const generateMetadata = async ({ params }) => {
 };
 
 const SinglePostPage = async ({ params }) => {
-  // const post = await getData(params.slug);
-  const post = await getPost(params.slug);
+
+  const { slug } = params;
+
+  // FETCH DATA WITH AN API
+  console.log(slug)
+  const post = await getData('test-test');
+  console.log('post', post)
+
+  // FETCH DATA WITHOUT AN API
+  // const post = await getPost(params.slug);
+
   console.log("post", post, params.slug);
 
   return (
