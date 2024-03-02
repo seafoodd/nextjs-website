@@ -38,8 +38,8 @@ export const {
 } = NextAuth({
   providers: [
     GitHub({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
+      clientId: process.env.GH_ID,
+      clientSecret: process.env.GH_SECRET,
     }),
     CredentialsProvider({
       async authorize(credentials) {

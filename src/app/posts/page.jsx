@@ -1,12 +1,11 @@
 import PostCard from "@/components/postCard/postCard";
 import styles from "./posts.module.css";
-import { getPosts } from "@/lib/data";
 //import { revalidatePath } from "next/cache";
 
 // FETCH DATA WITH AN API
 const getData = async () => {
   const res = await fetch(`${process.env.URL}/api/posts`, {
-    next: { revalidate: 10 },
+    next: { revalidate: 1 },
   });
 
   if (!res.ok) {
