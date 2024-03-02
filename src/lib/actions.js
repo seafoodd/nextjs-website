@@ -27,7 +27,7 @@ export const addPost = async (formData) => {
     await newPost.save();
     console.log("post saved to db");
     //revalidatePath("/posts");
-    await revalidatePath("/posts");
+    revalidatePath("/posts");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
@@ -43,7 +43,7 @@ export const deletePost = async (formData) => {
 
     console.log(`post with id "${id}" deleted from db`);
     //revalidatePath("/posts");
-    await revalidatePath("/posts");
+    revalidatePath("/posts");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
@@ -91,7 +91,7 @@ export const register = async (formData) => {
 
     await newUser.save();
     console.log("user saved to db");
-    await revalidatePath("/");
+    revalidatePath("/");
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
