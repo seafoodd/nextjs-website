@@ -56,10 +56,20 @@ export const addUser = async (previousState, formData) => {
 
   try {
     connectToDb();
+
+    const user = await User.findOne({ username });
+
+    if (user) {
+      return { error: "User already exists!" };
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
     const newUser = new User({
       username,
       email,
-      password,
+      password: hashedPassword,
       img,
     });
 
@@ -67,6 +77,7 @@ export const addUser = async (previousState, formData) => {
     console.log("user added to db");
     //revalidatePath("/posts");
     revalidatePath("/admin");
+    return { success: true };
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
@@ -118,7 +129,7 @@ export const register = async (previousState, formData) => {
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
-    console.log(salt, password, hashedPassword);
+    //console.log(salt, password, hashedPassword);
 
     const newUser = new User({
       username,
