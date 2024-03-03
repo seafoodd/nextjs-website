@@ -30,7 +30,7 @@ const Links = ({ session }) => {
 
   // TEMPORARY
   const isAdmin = true;
-  console.log(session)
+  //console.log(session)
 
   return (
     <div className={styles.container}>

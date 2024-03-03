@@ -87,10 +87,10 @@ export const register = async (formData) => {
       password: hashedPassword,
     });
 
-    console.log(newUser);
+    //console.log(newUser);
 
     await newUser.save();
-    console.log("user saved to db");
+    //console.log("User saved to db");
     revalidatePath("/");
   } catch (err) {
     console.log(err);
@@ -101,7 +101,7 @@ export const register = async (formData) => {
 export const login = async (formData) => {
   const { username, password } = Object.fromEntries(formData);
 
-  console.log(process.env.URL, process.env.AUTH_URL);
+  //console.log(process.env.URL, process.env.AUTH_URL);
 
   try {
     await signIn("credentials", { username, password });
