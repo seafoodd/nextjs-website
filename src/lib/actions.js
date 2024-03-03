@@ -60,7 +60,7 @@ export const handleLogout = async () => {
   await signOut();
 };
 
-export const register = async (formData) => {
+export const register = async (previousState, formData) => {
   const { username, email, password, passwordRepeat } =
     Object.fromEntries(formData);
 
@@ -90,23 +90,28 @@ export const register = async (formData) => {
     //console.log(newUser);
 
     await newUser.save();
-    //console.log("User saved to db");
-    revalidatePath("/");
+    console.log("User saved to db");
+    return { success: true };
   } catch (err) {
     console.log(err);
     return { error: "Something went wrong!" };
   }
 };
 
-export const login = async (formData) => {
+export const login = async (previousState, formData) => {
   const { username, password } = Object.fromEntries(formData);
 
   //console.log(process.env.URL, process.env.AUTH_URL);
 
   try {
     await signIn("credentials", { username, password });
+    return { success: true };
   } catch (err) {
     console.log(err);
-    return { error: "Something went wrong!" };
+
+    if (err.message.includes("CredentialsSignin")) {
+      return { error: "Wrong username or password!" };
+    }
+    throw err;
   }
 };
