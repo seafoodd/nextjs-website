@@ -4,9 +4,11 @@ import styles from "./posts.module.css";
 
 // FETCH DATA WITH AN API
 const getData = async () => {
-  const res = await fetch(`${process.env.URL}/api/posts`, {
-    next: { revalidate: 1 },
-  });
+  const res = await fetch(
+    `${process.env.URL}/api/posts`,
+    { method: "GET" },
+    { next: { revalidate: 5 } }
+  );
 
   if (!res.ok) {
     throw new Error("Something went wrong");
