@@ -6,21 +6,21 @@ import Skeleton from "@/components/skeleton/skeleton";
 import { getPost } from "@/lib/data";
 
 // FETCH DATA WITH AN API
-const getData = async (slug) => {
-  //console.log("slug", slug, `http://localhost:3000/api/posts/${slug}`);
-  const res = await fetch(
-    `${process.env.URL}/api/posts/${slug}`,
-    { method: "GET" },
-    { next: { revalidate: 5 } },
-  );
+// const getData = async (slug) => {
+//   //console.log("slug", slug, `http://localhost:3000/api/posts/${slug}`);
+//   const res = await fetch(
+//     `${process.env.URL}/api/posts/${slug}`,
+//     { method: "GET" },
+//     { next: { revalidate: 5 } },
+//   );
 
-  if (!res.ok) {
-    throw new Error("Something went wrong");
-  }
+//   if (!res.ok) {
+//     throw new Error("Something went wrong");
+//   }
 
-  //console.log('res', res.json());
-  return res.json();
-};
+//   //console.log('res', res.json());
+//   return res.json();
+// };
 
 export const generateMetadata = async ({ params }) => {
   const { slug } = params;
@@ -38,11 +38,11 @@ const SinglePostPage = async ({ params }) => {
 
   // FETCH DATA WITH AN API
   //console.log(slug);
-  const post = await getData(slug);
-  console.log("post", post);
+  // const post = await getData(slug);
+  // console.log("post", post);
 
   // FETCH DATA WITHOUT AN API
-  // const post = await getPost(params.slug);
+  const post = await getPost(params.slug);
 
   //console.log("post", post, params.slug);
 
