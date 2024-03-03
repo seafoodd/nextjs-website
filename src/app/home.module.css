@@ -31,7 +31,7 @@
   border-radius: 5px;
 }
 
-.button:first-child {
+#buttonBlue {
   background-color: var(--btn);
   color: var(--text);
 }
